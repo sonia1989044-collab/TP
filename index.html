@@ -6,109 +6,29 @@
     <title>台北行程小工具</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#f5f5f5">
-    <link rel="apple-touch-icon" href="icon.png"> <!-- 假設有圖標檔案 -->
+    <link rel="apple-touch-icon" href="icon.png">
     <style>
-        /* 日式極簡風格：中性色調、大量留白、sans-serif 字體 */
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            font-size: 16px;
-        }
-        header {
-            width: 100%;
-            background-color: #fff;
-            padding: 16px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        nav {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 16px;
-        }
-        nav button {
-            background: none;
-            border: none;
-            font-size: 14px;
-            padding: 8px 16px;
-            cursor: pointer;
-            color: #666;
-        }
-        nav button.active {
-            color: #333;
-            border-bottom: 2px solid #333;
-        }
-        section {
-            width: 90%;
-            max-width: 400px;
-            margin: 16px 0;
-        }
-        .day-card {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .weather {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 8px;
-        }
-        .category {
-            margin-bottom: 12px;
-        }
-        .category h3 {
-            font-size: 16px;
-            margin: 8px 0;
-            color: #333;
-        }
-        .nav-btn {
-            background-color: #eee;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        .highlight-must-eat { color: #d32f2f; font-weight: bold; } /* 紅色 - 必吃美食 */
-        .highlight-must-order { color: #388e3c; font-weight: bold; } /* 綠色 - 必點菜單 */
-        .highlight-must-buy { color: #1976d2; font-weight: bold; } /* 藍色 - 必買伴手禮 */
-        .highlight-reserve { color: #f57c00; font-weight: bold; } /* 橙色 - 重要預約 */
-        .story { font-size: 14px; color: #555; margin-top: 8px; }
-        #budget-section form {
-            display: flex;
-            flex-direction: column;
-        }
-        #budget-section input {
-            margin-bottom: 8px;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        #budget-list {
-            list-style: none;
-            padding: 0;
-        }
-        #budget-list li {
-            background: #fff;
-            padding: 8px;
-            margin-bottom: 8px;
-            border-radius: 4px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .hidden { display: none; }
+        body{font-family:'Noto Sans TC',sans-serif;background:#f5f5f5;color:#333;margin:0;padding:0;display:flex;flex-direction:column;align-items:center;min-height:100vh;font-size:16px;}
+        header{width:100%;background:#fff;padding:16px;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.1);position:sticky;top:0;z-index:10;}
+        nav{display:flex;justify-content:space-around;margin-top:16px;}
+        nav button{background:none;border:none;font-size:14px;padding:8px 16px;cursor:pointer;color:#666;}
+        nav button.active{color:#333;border-bottom:2px solid #333;}
+        section{width:90%;max-width:400px;margin:16px 0;}
+        .day-card{background:#fff;border-radius:8px;padding:16px;margin-bottom:16px;box-shadow:0 2px 4px rgba(0,0,0,0.1);}
+        .weather{font-size:14px;color:#666;margin-bottom:8px;}
+        .category{margin-bottom:12px;}
+        .category h3{font-size:16px;margin:8px 0;color:#333;}
+        .nav-btn{background:#eee;border:none;padding:8px 12px;border-radius:4px;cursor:pointer;font-size:12px;}
+        .highlight-must-eat{color:#d32f2f;font-weight:bold;}
+        .highlight-must-order{color:#388e3c;font-weight:bold;}
+        .highlight-must-buy{color:#1976d2;font-weight:bold;}
+        .highlight-reserve{color:#f57c00;font-weight:bold;}
+        .story{font-size:14px;color:#555;margin-top:8px;}
+        #budget-section form{display:flex;flex-direction:column;}
+        #budget-section input{margin-bottom:8px;padding:8px;border:1px solid #ddd;border-radius:4px;}
+        #budget-list{list-style:none;padding:0;}
+        #budget-list li{background:#fff;padding:8px;margin-bottom:8px;border-radius:4px;display:flex;justify-content:space-between;}
+        .hidden{display:none;}
     </style>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
@@ -130,115 +50,44 @@
         <div class="day-card">
             <h2>Day 1: 4 Dec</h2>
             <div class="weather" id="weather-day1">載入天氣中...</div>
-            <div class="category">
-                <h3>交通</h3>
-                <p>香港 → 台北桃園機場 (CX564 08:30/10:15)</p>
-                <p>專車接送至 NTSU 登記 (客人自行安排)</p>
-                <button class="nav-btn" onclick="navigateTo('台灣桃園國際機場')">導航至機場</button>
-                <button class="nav-btn" onclick="navigateTo('桃園台灣體育大學')">導航至 NTSU</button>
-            </div>
-            <div class="category">
-                <h3>餐飲</h3>
-                <p>午餐/晚餐: 客人自理</p>
-            </div>
-            <div class="category">
-                <h3>住宿</h3>
-                <p>台北悅徠舘 Joyfultel - 林口飯店</p>
-                <button class="nav-btn" onclick="navigateTo('台北悅徠舘 Joyfultel 林口')">導航至酒店</button>
-            </div>
-            <p class="story">備註: 交流考察地點只限新北市、台北市、桃園市，其他地方需要補回車差 (每日用車10小時)。如用車超時，需要補回超時費用，每小時HK$400，每日最多2小時。</p>
+            <div class="category"><h3>交通</h3><p>香港 → 台北桃園機場 (CX564 08:30/10:15)</p><p>專車接送至 NTSU 登記 (自行安排)</p><button class="nav-btn" onclick="navigateTo('台灣桃園國際機場')">導航至機場</button><button class="nav-btn" onclick="navigateTo('桃園台灣體育大學')">導航至 NTSU</button></div>
+            <div class="category"><h3>餐飲</h3><p>午餐/晚餐: 自理</p></div>
+            <div class="category"><h3>住宿</h3><p>台北悅徠舘 Joyfultel - 林口飯店</p><button class="nav-btn" onclick="navigateTo('台北悅徠舘 Joyfultel 林口')">導航至酒店</button></div>
+            <p class="story">備註: 限新北市、台北市、桃園市，超時每小時 HK$400。</p>
         </div>
         <div class="day-card">
             <h2>Day 2: 5 Dec</h2>
             <div class="weather" id="weather-day2">載入天氣中...</div>
-            <div class="category">
-                <h3>景點</h3>
-                <p>全日 NTSU 交流比賽 (自行安排，專車接送)</p>
-                <p>桃園觀光夜市</p>
-                <button class="nav-btn" onclick="navigateTo('桃園台灣體育大學')">導航至 NTSU</button>
-                <button class="nav-btn" onclick="navigateTo('桃園觀光夜市')">導航至夜市</button>
-                <p class="story">桃園觀光夜市為當地熱鬧街頭，擁有超過40年歷史的老字號攤位。 <span class="highlight-must-eat">必吃: 蚵仔煎、生炒花枝羮、大腸包小腸、牛舌餅、越南煎蝦餅、米糕粥、排骨酥麵、蜜汁燒烤、霸王豬腳、牛肉麵、黑人鼎邊趖、北港烤肉、白糖粿。</span> 建議傍晚前往，避免高峰擁擠。</p>
-            </div>
-            <div class="category">
-                <h3>餐飲</h3>
-                <p>早餐: 酒店早餐</p>
-                <p>午餐: 客人自理</p>
-                <p>晚餐: 客人自理於夜市</p>
-            </div>
+            <div class="category"><h3>景點</h3><p>全日 NTSU 交流比賽 (專車接送)</p><p>桃園觀光夜市</p><button class="nav-btn" onclick="navigateTo('桃園台灣體育大學')">導航至 NTSU</button><button class="nav-btn" onclick="navigateTo('桃園觀光夜市')">導航至夜市</button><p class="story">40年歷史老攤位。 <span class="highlight-must-eat">必吃: 蚵仔煎、生炒花枝羮、大腸包小腸、牛舌餅、越南煎蝦餅、米糕粥、排骨酥麵、蜜汁燒烤、霸王豬腳、牛肉麵、黑人鼎邊趖、北港烤肉、白糖粿。</span> 傍晚前往避高峰。</p></div>
+            <div class="category"><h3>餐飲</h3><p>早餐: 酒店；午餐: 自理；晚餐: 自理於夜市</p></div>
         </div>
         <div class="day-card">
             <h2>Day 3: 6 Dec</h2>
             <div class="weather" id="weather-day3">載入天氣中...</div>
-            <div class="category">
-                <h3>景點</h3>
-                <p>全日 NTSU 交流比賽 (自行安排，專車接送)</p>
-            </div>
-            <div class="category">
-                <h3>餐飲</h3>
-                <p>早餐: 酒店早餐</p>
-                <p>午餐: 客人自理</p>
-                <p>晚餐: 客人自理於饗饗新莊店 (自助餐)</p>
-                <button class="nav-btn" onclick="navigateTo('饗饗新莊店')">導航至餐廳</button>
-                <p class="story">饗饗新莊店為高端自助餐廳，提供360度景觀。 <span class="highlight-must-order">必點: 生魚片、握壽司、烤蝦、熱炒、甜點、港式烤鴨、比目魚鰭邊肉、鮭魚肚、牛肉、干貝、雪蟹、羊排、牛肋、蝦、雞肉、壽司、松葉蟹腳。</span> 建議預約，價格約1690 NTD/人。</p>
-            </div>
+            <div class="category"><h3>景點</h3><p>全日 NTSU 交流比賽 (專車接送)</p></div>
+            <div class="category"><h3>餐飲</h3><p>早餐: 酒店；午餐: 自理；晚餐: 自理於饗饗新莊店 (自助餐)</p><button class="nav-btn" onclick="navigateTo('饗饗新莊店')">導航至餐廳</button><p class="story">高端360度景觀。 <span class="highlight-must-order">必點: 生魚片、握壽司、烤蝦、熱炒、甜點、港式烤鴨、比目魚鰭邊肉、鮭魚肚、牛肉、干貝、雪蟹、羊排、牛肋、蝦、雞肉、壽司、松葉蟹腳。</span> 預約，1690 NTD/人。</p></div>
         </div>
         <div class="day-card">
             <h2>Day 4: 7 Dec</h2>
             <div class="weather" id="weather-day4">載入天氣中...</div>
-            <div class="category">
-                <h3>景點</h3>
-                <p>NTSU 交流比賽 (自行安排，專車接送)</p>
-                <p>新富町文化市場</p>
-                <p>大稻埕商圈</p>
-                <p>大稻埕碼頭</p>
-                <p>四四南村簡單市集</p>
-                <p>cookie886 伴手禮</p>
-                <button class="nav-btn" onclick="navigateTo('新富町文化市場')">導航至市場</button>
-                <button class="nav-btn" onclick="navigateTo('大稻埕商圈')">導航至商圈</button>
-                <button class="nav-btn" onclick="navigateTo('大稻埕碼頭')">導航至碼頭</button>
-                <button class="nav-btn" onclick="navigateTo('四四南村簡單市集')">導航至市集</button>
-                <button class="nav-btn" onclick="navigateTo('cookie886')">導航至商店</button>
-                <p class="story">新富町文化市場建於1935年日治時期，原為綠町食料品小賣市場，馬蹄形建築，為市定古蹟，現為文化樞紐。<span class="highlight-must-eat">必吃: 金和壽司、阿婆油飯、艋舺大豐魚丸店、阿婆油飯+糯米腸、大豐魚丸店雞捲+炸牛蒡、紅龜伯手工粿店、鹹光餅、紫米芋頭糕。</span> 大稻埕商圈為台北最古老街區，昔日茶葉貿易中心。<span class="highlight-must-buy">必買: COFE喫茶咖啡「吃的台灣茶」、滋養和菓子草莓大福紅豆最中、林復振、李亭香、十字軒、龍月堂、義美食品、果醬、果乾、醬油、筆記本、路力草莓大福、8結蛋捲、惠珍軒堅果果乾。</span> <span class="highlight-must-eat">必吃: 林合發油飯、丸隆生魚行、賣麵炎仔、許仔豬腳麵線、大稻埕葉家肉粥、林合發油飯粿店、大稻埕魯肉飯、妙口四神湯。</span> 大稻埕碼頭始建於1851年清代，為貿易港口，現可散步、騎車、看煙火、逛市集。 四四南村簡單市集為有機市集，建議訪好丘貝果。<span class="highlight-must-eat">必吃: 四季春、地瓜乳酪、眷村腐乳雞腿、經典貝果、烤肉飯、榮嘉義傳統豆花。</span> <span class="highlight-must-buy">cookie886: 經典原味、可可、阿里山蜜香紅茶、黑騎士可可粉、金桶奶油、諾曼第奶油、茶味、巧克力、Selected臻藏小黑盒。</span></p>
-            </div>
-            <div class="category">
-                <h3>餐飲</h3>
-                <p>早餐: 酒店早餐</p>
-                <p>午餐: 客人自理</p>
-                <p>晚餐: 客人自理於鼎王忠孝店 (火鍋)</p>
-                <button class="nav-btn" onclick="navigateTo('鼎王忠孝店')">導航至餐廳</button>
-                <p class="story"><span class="highlight-must-order">必點: 鴨血、豆腐、手工丸子、酸菜白肉鍋、伊比利豬、蟹肉、豬肉丸、牛肉片、玻璃麵、香菇、大腸頭、豬肚、上選牛小排、五花去骨鮮肥牛、梅花豬肉、鴛鴦滑。</span> 湯底: 麻辣或酸菜，品質高，建議預約。</p>
-            </div>
+            <div class="category"><h3>景點</h3><p>NTSU 交流比賽 (專車接送)</p><p>新富町文化市場</p><p>大稻埕商圈</p><p>大稻埕碼頭</p><p>四四南村簡單市集</p><p>cookie886 伴手禮</p><button class="nav-btn" onclick="navigateTo('新富町文化市場')">導航至市場</button><button class="nav-btn" onclick="navigateTo('大稻埕商圈')">導航至商圈</button><button class="nav-btn" onclick="navigateTo('大稻埕碼頭')">導航至碼頭</button><button class="nav-btn" onclick="navigateTo('四四南村簡單市集')">導航至市集</button><button class="nav-btn" onclick="navigateTo('cookie886')">導航至商店</button><p class="story">新富町1935年日治市場，古蹟文化樞紐。<span class="highlight-must-eat">必吃: 金和壽司、阿婆油飯、艋舺大豐魚丸店、阿婆油飯+糯米腸、大豐魚丸店雞捲+炸牛蒡、紅龜伯手工粿店、鹹光餅、紫米芋頭糕、周記肉粥。</span> 大稻埕古老街區，茶葉貿易中心。<span class="highlight-must-buy">必買: COFE喫茶「吃的台灣茶」、滋養和菓子草莓大福紅豆最中、林復振、李亭香、十字軒、龍月堂、義美食品、果醬、果乾、醬油、筆記本、路力草莓大福、8結蛋捲、惠珍軒堅果果乾。</span> <span class="highlight-must-eat">必吃: 林合發油飯、丸隆生魚行、賣麵炎仔、許仔豬腳麵線、大稻埕葉家肉粥、林合發油飯粿店、大稻埕魯肉飯、妙口四神湯。</span> 碼頭1851年建，貿易港口，現散步、騎車、看煙火。四四南村有機市集。<span class="highlight-must-eat">必吃: 四季春、地瓜乳酪、眷村腐乳雞腿、經典貝果、烤肉飯、榮嘉義傳統豆花。</span> <span class="highlight-must-buy">cookie886: 經典原味、可可、阿里山蜜香紅茶、黑騎士可可粉、金桶奶油、諾曼第奶油、茶味、巧克力、Selected臻藏小黑盒。</span></p></div>
+            <div class="category"><h3>餐飲</h3><p>早餐: 酒店；午餐: 自理；晚餐: 自理於鼎王忠孝店 (火鍋)</p><button class="nav-btn" onclick="navigateTo('鼎王忠孝店')">導航至餐廳</button><p class="story"><span class="highlight-must-order">必點: 鴨血、豆腐、手工丸子、酸菜白肉鍋、伊比利豬、蟹肉、豬肉丸、牛肉片、玻璃麵、香菇、大腸頭、豬肚、上選牛小排、五花去骨鮮肥牛、梅花豬肉、鴛鴦滑。</span> 湯底麻辣或酸菜，預約。</p></div>
         </div>
         <div class="day-card">
             <h2>Day 5: 8 Dec</h2>
             <div class="weather" id="weather-day5">載入天氣中...</div>
-            <div class="category">
-                <h3>景點</h3>
-                <p>桃園忠烈祠暨神社文化園區</p>
-                <p>華泰名品城 Outlet</p>
-                <button class="nav-btn" onclick="navigateTo('桃園忠烈祠暨神社文化園區')">導航至園區</button>
-                <button class="nav-btn" onclick="navigateTo('華泰名品城')">導航至 Outlet</button>
-                <p class="story">桃園忠烈祠暨神社文化園區原為1938年桃園神社，為台灣保存最完整的日治神社，市定古蹟。包含鳥居、參道、石燈籠、手水舍、社務所、拜殿、本殿，建議訪井上豆花享下午茶。華泰名品城為美式露天 Outlet。<span class="highlight-must-buy">必買: Tommy Hilfiger、Polo Ralph Lauren、NIKE、adidas、CHARLES & KEITH、SAINT LAURENT、BOTTEGA VENETA、BALENCIAGA、YSL、Levi's、VERSACE、OMEGA、GREGOR、JIMMY CHOO、康寧餐具。</span> 建議早去避人群。</p>
-            </div>
-            <div class="category">
-                <h3>交通</h3>
-                <p>台北桃園機場 → 香港 (CX473 13:35/20:40)</p>
-                <button class="nav-btn" onclick="navigateTo('台灣桃園國際機場')">導航至機場</button>
-            </div>
-            <div class="category">
-                <h3>餐飲</h3>
-                <p>早餐: 酒店早餐</p>
-                <p>午餐: 客人自理</p>
-            </div>
+            <div class="category"><h3>景點</h3><p>桃園忠烈祠暨神社文化園區</p><p>華泰名品城 Outlet</p><button class="nav-btn" onclick="navigateTo('桃園忠烈祠暨神社文化園區')">導航至園區</button><button class="nav-btn" onclick="navigateTo('華泰名品城')">導航至 Outlet</button><p class="story">忠烈祠1938年神社，台灣最完整日治神社，包含鳥居、參道、石燈籠、手水舍、社務所、拜殿、本殿。華泰美式露天 Outlet。<span class="highlight-must-buy">必買: YSL、PRADA、Tommy Hilfiger、Polo Ralph Lauren、NIKE、adidas、CHARLES & KEITH、SAINT LAURENT、BOTTEGA VENETA、BALENCIAGA、VERSACE、OMEGA、GREGOR、JIMMY CHOO、康寧餐具。</span> 早去避人群。</p></div>
+            <div class="category"><h3>交通</h3><p>台北桃園機場 → 香港 (CX473 18:35/20:40)</p><button class="nav-btn" onclick="navigateTo('台灣桃園國際機場')">導航至機場</button></div>
+            <div class="category"><h3>餐飲</h3><p>早餐: 酒店；午餐: 自理</p></div>
         </div>
     </section>
 
     <section id="flights-section" class="hidden">
         <div class="day-card">
             <h2>航班資訊</h2>
-            <p>去程: CX564 香港 → 台北 08:30-10:15 (國泰航空)</p>
-            <p>回程: CX473 台北 → 香港 13:35-20:40 (國泰航空)</p>
-            <p>建議提前查詢實時狀態。</p>
+            <p>去程: CX564 香港 → 台北 08:30-10:15</p>
+            <p>回程: CX473 台北 → 香港 18:35-20:40</p>
+            <p>查詢實時狀態。</p>
         </div>
     </section>
 
@@ -246,9 +95,9 @@
         <div class="day-card">
             <h2>住宿資訊</h2>
             <p>台北悅徠舘 Joyfultel - 林口飯店</p>
-            <p>地址: 鄰近林口商圈，距離機場捷運長庚醫院站約1公里。</p>
-            <p>聯絡: 透過網站 www.joyfultel.com 查詢。</p>
-            <p>設施: 早餐吧、健身區、自助洗衣、會議室、免費停車 (限2米高)。</p>
+            <p>地址: 近林口商圈，距機捷長庚醫院站1km。</p>
+            <p>聯絡: www.joyfultel.com</p>
+            <p>設施: 早餐吧、健身區、自助洗衣、會議室、免費停車(限2m高)。</p>
             <button class="nav-btn" onclick="navigateTo('台北悅徠舘 Joyfultel 林口')">導航</button>
         </div>
     </section>
@@ -259,7 +108,7 @@
             <p>警察: 110</p>
             <p>消防/醫療: 119</p>
             <p>通用緊急: 112</p>
-            <p>醫院: 長庚醫院 (附近，步行900米)。</p>
+            <p>醫院: 長庚醫院 (步行900m)。</p>
         </div>
     </section>
 
@@ -277,119 +126,12 @@
     </section>
 
     <script>
-        // 顯示區塊
-        function showSection(section) {
-            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(`${section}-section`).classList.remove('hidden');
-            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-            document.querySelector(`button[onclick="showSection('${section}')"]`).classList.add('active');
-        }
-
-        // 導航
-        function navigateTo(place) {
-            const url = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(place)}`;
-            window.open(url, '_blank');
-        }
-
-        // 天氣 (使用 OpenWeatherMap API，替換 YOUR_API_KEY)
-        const apiKey = '63966c4126824d4c4dd15602ce663d8c'; // 用戶需替換
-        const city = 'Taipei,TW';
-        async function getWeather(dayId) {
-            try {
-                const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=zh_tw`);
-                const data = await res.json();
-                document.getElementById(`weather-${dayId}`).textContent = `天氣: ${data.weather[0].description}, 溫度: ${data.main.temp}°C`;
-            } catch (e) {
-                document.getElementById(`weather-${dayId}`).textContent = '無法載入天氣 (檢查 API 金鑰)';
-            }
-        }
-        ['day1', 'day2', 'day3', 'day4', 'day5'].forEach(getWeather);
-
-        // Firebase 配置 (用戶需替換)
-        const firebaseConfig = {
-            apiKey: "YOUR_FIREBASE_API_KEY",
-            authDomain: "YOUR_PROJECT.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const userId = 'anonymous'; // 可改為真實用戶 ID，若有登入
-
-        // 記帳 (同步到 Firebase，若離線使用 localStorage)
-        const form = document.getElementById('budget-form');
-        const list = document.getElementById('budget-list');
-        const totalSpan = document.getElementById('total');
-
-        async function loadBudget() {
-            try {
-                const snapshot = await db.collection(`users/${userId}/expenses`).get();
-                let total = 0;
-                list.innerHTML = '';
-                snapshot.forEach(doc => {
-                    const data = doc.data();
-                    addToList(data.item, data.amount, doc.id);
-                    total += data.amount;
-                });
-                totalSpan.textContent = total;
-            } catch (e) {
-                console.log('使用離線模式');
-                const local = JSON.parse(localStorage.getItem('budget') || '[]');
-                let total = 0;
-                local.forEach(({item, amount}) => {
-                    addToList(item, amount);
-                    total += amount;
-                });
-                totalSpan.textContent = total;
-            }
-        }
-
-        function addToList(item, amount, id) {
-            const li = document.createElement('li');
-            li.innerHTML = `${item}: ${amount} NTD <button onclick="deleteExpense('${id || item}')">刪除</button>`;
-            list.appendChild(li);
-        }
-
-        form.addEventListener('submit', async e => {
-            e.preventDefault();
-            const item = document.getElementById('item').value;
-            const amount = parseFloat(document.getElementById('amount').value);
-            if (!item || isNaN(amount)) return;
-
-            try {
-                const docRef = await db.collection(`users/${userId}/expenses`).add({item, amount});
-                addToList(item, amount, docRef.id);
-                totalSpan.textContent = parseFloat(totalSpan.textContent) + amount;
-            } catch (e) {
-                const local = JSON.parse(localStorage.getItem('budget') || '[]');
-                local.push({item, amount});
-                localStorage.setItem('budget', JSON.stringify(local));
-                addToList(item, amount);
-                totalSpan.textContent = parseFloat(totalSpan.textContent) + amount;
-            }
-            form.reset();
-        });
-
-        async function deleteExpense(id) {
-            try {
-                await db.collection(`users/${userId}/expenses`).doc(id).delete();
-            } catch (e) {
-                // 離線刪除
-                let local = JSON.parse(localStorage.getItem('budget') || '[]');
-                local = local.filter(exp => exp.item !== id);
-                localStorage.setItem('budget', JSON.stringify(local));
-            }
-            loadBudget();
-        }
-
-        loadBudget();
-
-        // PWA 安裝
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js');
-        }
+        function showSection(s){document.querySelectorAll('section').forEach(e=>e.classList.add('hidden'));document.getElementById(s+'-section').classList.remove('hidden');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));document.querySelector(`button[onclick="showSection('${s}')"]`).classList.add('active');}
+        function navigateTo(p){window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(p)}`,'_blank');}
+        const apiKey='YOUR_OPENWEATHER_API_KEY';const city='Taipei,TW';async function getWeather(d){try{const r=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=zh_tw`);const data=await r.json();document.getElementById(`weather-${d}`).textContent=`天氣: ${data.weather[0].description}, 溫度: ${data.main.temp}°C`;}catch(e){document.getElementById(`weather-${d}`).textContent='無法載入天氣';}}['day1','day2','day3','day4','day5'].forEach(getWeather);
+        const firebaseConfig={apiKey:"YOUR_FIREBASE_API_KEY",authDomain:"YOUR_PROJECT.firebaseapp.com",projectId:"YOUR_PROJECT_ID",storageBucket:"YOUR_PROJECT.appspot.com",messagingSenderId:"YOUR_SENDER_ID",appId:"YOUR_APP_ID"};firebase.initializeApp(firebaseConfig);const db=firebase.firestore();const userId='anonymous';
+        const form=document.getElementById('budget-form');const list=document.getElementById('budget-list');const totalSpan=document.getElementById('total');async function loadBudget(){try{const s=await db.collection(`users/${userId}/expenses`).get();let t=0;list.innerHTML='';s.forEach(d=>{const data=d.data();addToList(data.item,data.amount,d.id);t+=data.amount;});totalSpan.textContent=t;}catch(e){console.log('離線模式');const l=JSON.parse(localStorage.getItem('budget')||'[]');let t=0;l.forEach(({item,amount})=>{addToList(item,amount);t+=amount;});totalSpan.textContent=t;}}function addToList(i,a,id){const li=document.createElement('li');li.innerHTML=`${i}: ${a} NTD <button onclick="deleteExpense('${id||i}')">刪除</button>`;list.appendChild(li);}form.addEventListener('submit',async e=>{e.preventDefault();const i=document.getElementById('item').value;const a=parseFloat(document.getElementById('amount').value);if(!i||isNaN(a))return;try{const d=await db.collection(`users/${userId}/expenses`).add({item:i,amount:a});addToList(i,a,d.id);totalSpan.textContent=parseFloat(totalSpan.textContent)+a;}catch(e){const l=JSON.parse(localStorage.getItem('budget')||'[]');l.push({item:i,amount:a});localStorage.setItem('budget',JSON.stringify(l));addToList(i,a);totalSpan.textContent=parseFloat(totalSpan.textContent)+a;}form.reset();});async function deleteExpense(id){try{await db.collection(`users/${userId}/expenses`).doc(id).delete();}catch(e){let l=JSON.parse(localStorage.getItem('budget')||'[]');l=l.filter(e=>e.item!==id);localStorage.setItem('budget',JSON.stringify(l));}loadBudget();}loadBudget();
+        if('serviceWorker'in navigator){navigator.serviceWorker.register('/sw.js');}
     </script>
 </body>
 </html>
